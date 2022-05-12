@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+		<meta name="application-name" content="FlashCard">
+		<meta name="description" content="Web Applicarion">
+		<meta name="author" content="ANSH KUSHWAHA">
+		<meta name="color-scheme" content="dark">
+		<meta name="theme-color" content="black" media="(prefers-color-scheme: dark)">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="refresh" content="; url='/'">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" crossorigin="anonymous">
+		<noscript>JavaScript Error !!! :- Not Supported OR Currenlty Blocked by Your Browser</noscript>
+		<title>FLASHCARD WEB APPLICATION</title>
+	</head>
+	<body class="bg-dark text-light">
+		<header class="container-fluid sticky-top bg-dark navbar navbar-dark">
+			<nav class="nav navbar-nav nav-pills">
+				<button type="button" class="navbar-brand nav-link bi bi-house-fill btn btn-dark btn-xxl btn-outline-dark fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;FlashCard Web Application</button>
+			</nav>
+		</header>
+		<main id="app">
+			<section>
+				<div class="container">
+					<br>
+					<p class="display-1 fw-bold text-center text-primary">WELCOME</p>
+					<br>
+				</div>
+				<div v-if="html === 'home'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="bi bi-person-fill fs-1 fw-bold text-center text-info">&nbsp;&nbsp;LOG IN</p>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-person-square btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Administrator Log In" @click="ht('admin_login')" autofocus>&nbsp;&nbsp;ADMINISTRATOR</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-person-circle btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="User Sign Up" @click="ht('new_login')" autofocus>&nbsp;&nbsp;NEW USER</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-person-circle btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="User Sign In" @click="ht('user_login')" autofocus>&nbsp;&nbsp;EXISTING USER</button>
+					</span>
+					<br>
+				</div>
+				<div v-else-if="html === 'admin_login'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<form class="needs-validation" id="admin_login" accept-charset="utf-8" action="/" autocomplete="on" enctype="application/x-www-form-urlencoded" method="post" target="_self">
+						<span class="row justify-content-center">
+							<p class="bi bi-key-fill fs-1 fw-bold text-center text-info"><label class="form-label">&nbsp;&nbsp;Administrator Password</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="password" name="admin_pass" placeholder="PASSWORD" pattern="^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W+).{4,16}$" minlength="4" maxlength="16" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p>
+								<ul class="list-unstyled container fs-4 fw-bold text-start text-secondary">
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Uppercase Character</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Lowercase Character</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Number</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Special Symbol</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must not contain any Whitespaces</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must be 4 to 16 Characters long</li>
+								</ul>
+							</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<button type="submit" class="bi bi-check-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Submit" form="admin_login" formaction="/" formenctype="application/x-www-form-urlencoded" formmethod="post" formtarget="_self" autofocus>&nbsp;&nbsp;SUBMIT</button>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<button type="reset" class="bi bi-x-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Go Back" @click="ht('home')" autofocus>&nbsp;&nbsp;GO BACK</button>
+						</span>
+					</form>
+					<br>
+				</div>
+				<div v-else-if="html === 'new_login'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<form class="needs-validation" id="new_login" accept-charset="utf-8" action="/" autocomplete="on" enctype="application/x-www-form-urlencoded" method="post" target="_self">
+						<span class="row justify-content-center">
+							<p class="bi bi-envelope-fill fs-1 fw-bold text-center text-info"><label class="form-label">&nbsp;&nbsp;E-Mail ID</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="email" name="new_email" @keydown.enter.prevent placeholder="E-Mail ID" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" minlength="4" maxlength="64" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p class="container fs-4 fw-bold text-start text-secondary">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Please Enter a Valid E-Mail</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<p class="bi bi-key-fill fs-1 fw-bold text-center text-info"><label class="form-label">&nbsp;&nbsp;New Password</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="password" name="new_pass" ref="new_pass" v-model="new_pass" @keydown.enter.prevent placeholder="PASSWORD" pattern="^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W+).{4,16}$" minlength="4" maxlength="16" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p>
+								<ul class="list-unstyled container fs-4 fw-bold text-start text-secondary">
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Uppercase Character</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Lowercase Character</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Number</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Special Symbol</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must not contain any Whitespaces</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must be 4 to 16 Characters long</li>
+								</ul>
+							</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<p class="bi bi-key-fill fs-1 fw-bold text-center text-info"><label class="form-label">&nbsp;&nbsp;Confirm Password</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="password" name="cnf_pass" ref="cnf_pass" v-model="cnf_pass" @keydown.enter.prevent placeholder="PASSWORD" pattern="^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W+).{4,16}$" minlength="4" maxlength="16" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p class="container fs-4 fw-bold text-start text-secondary">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Please Retype the Same Password as Above</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<p class="alert alert-danger bi bi-exclamation-circle-fill alert-heading col-9 fs-4 fw-bold text-center text-danger" role="alert" ref="alert" style="display: none;">&nbsp;&nbsp;Retyped Password didn't Match with Upper One</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<button type="submit" class="bi bi-check-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Submit" ref="submit" form="new_login" formaction="/" formenctype="application/x-www-form-urlencoded" formmethod="post" formtarget="_self" autofocus>&nbsp;&nbsp;SUBMIT</button>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<button type="reset" class="bi bi-x-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Go Back" @click="ht('home')" autofocus>&nbsp;&nbsp;GO BACK</button>
+						</span>
+					</form>
+					<br>
+				</div>
+				<div v-else-if="html === 'user_login'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<form class="needs-validation" id="user_login" accept-charset="utf-8" action="/" autocomplete="on" enctype="application/x-www-form-urlencoded" method="post" target="_self">
+						<span class="row justify-content-center">
+							<p class="bi bi-envelope-fill fs-1 fw-bold text-center text-info"><label class="form-label">&nbsp;&nbsp;E-Mail ID</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="email" name="user_email" placeholder="E-Mail ID" pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" minlength="4" maxlength="64" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p class="container fs-4 fw-bold text-start text-secondary">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Please Enter a Valid E-Mail</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<p class="bi bi-key-fill fs-1 fw-bold text-center text-info"><label class="form-label">&nbsp;&nbsp;Password</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="password" name="user_pass" placeholder="PASSWORD" pattern="^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W+).{4,16}$" minlength="4" maxlength="16" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p>
+								<ul class="list-unstyled container fs-4 fw-bold text-start text-secondary">
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Uppercase Character</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Lowercase Character</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Number</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must contain at least one Special Symbol</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must not contain any Whitespaces</li>
+									<li>&emsp;&emsp;&emsp;&emsp;Password must be 4 to 16 Characters long</li>
+								</ul>
+							</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<button type="submit" class="bi bi-check-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Submit" form="user_login" formaction="/" formenctype="application/x-www-form-urlencoded" formmethod="post" formtarget="_self" autofocus>&nbsp;&nbsp;SUBMIT</button>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<button type="reset" class="bi bi-x-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Go Back" @click="ht('home')" autofocus>&nbsp;&nbsp;GO BACK</button>
+						</span>
+					</form>
+					<br>
+				</div>
+			</section>
+		</main>
+		<footer class="container-fluid position-sticky bottom-0 bg-dark text-center">
+			<address>
+				<a type="button" role="button" class="bi bi-envelope-fill btn btn-dark btn-xxl display-1 fw-bold shadow link-light" title="Email ID" href="mailto:21f1006019@student.onlinedegree.iitm.ac.in" autofocus>&nbsp;&nbsp;ANSH KUSHWAHA&nbsp; 21f1006019@student.onlinedegree.iitm.ac.in</a>
+			</address>
+		</footer>
+		<script src="https://unpkg.com/vue@3"></script>
+		<script type="application/javascript" src="../static/js/script.js"></script>
+	</body>
+</html>

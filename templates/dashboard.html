@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+		<meta name="application-name" content="FlashCard">
+		<meta name="description" content="Web Applicarion">
+		<meta name="author" content="ANSH KUSHWAHA">
+		<meta name="color-scheme" content="dark">
+		<meta name="theme-color" content="black" media="(prefers-color-scheme: dark)">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="refresh" content="; url='/'">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" crossorigin="anonymous">
+		<noscript>JavaScript Error !!! :- Not Supported OR Currenlty Blocked by Your Browser</noscript>
+		<title>FLASHCARD WEB APPLICATION</title>
+	</head>
+	<body class="bg-dark text-light">
+		<header class="container-fluid sticky-top bg-dark navbar navbar-dark">
+			<nav class="nav navbar-nav nav-pills">
+				<button type="button" class="navbar-brand nav-link bi bi-house-fill btn btn-dark btn-xxl btn-outline-dark fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;FlashCard Web Application</button>
+			</nav>
+		</header>
+		<main id="app">
+			<section>
+				<div class="container-fluid">
+					<br>
+					<span>
+						<br>
+						<p class="fs-1 fw-bold text-center text-primary">Hi ... , {{ user }}</p>
+						<br>
+					</span>
+					<br>
+				</div>
+				{% set ns = namespace(dek='') %}
+				<button type="button" class="bi bi-box-arrow-right btn btn-secondary btn-xxl btn-outline-light position-fixed top-0 end-0 col-3 fs-1 fw-bold shadow" style="z-index: 1020;" title="Log Out" onclick="location='/'" autofocus>&nbsp;&nbsp;LOG OUT</button>
+				{% if user == 'Administrator' %}
+				<div v-if="html === 'home'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="bi bi-list fs-1 fw-bold text-center text-info">&nbsp;&nbsp;Administrator Menu</p>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-stack btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Decks" @click="ht('decks')" autofocus>&nbsp;&nbsp;DECKS</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-people-fill btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Users" @click="ht('users')" autofocus>&nbsp;&nbsp;USERS</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="html === 'decks'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="bi bi-stack fs-1 fw-bold text-center text-info">&nbsp;&nbsp;Decks</p>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="View Deck" @click="ht('view_deck')" autofocus>&nbsp;&nbsp;VIEW DECK</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Create Deck" @click="ht('create_deck')" autofocus>&nbsp;&nbsp;CREATE DECK</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Edit Deck" @click="ht('edit_deck')" autofocus>&nbsp;&nbsp;EDIT DECK</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Remove Deck" @click="ht('remove_deck')" autofocus>&nbsp;&nbsp;REMOVE DECK</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Export Deck" @click="ht('export_deck')" autofocus>&nbsp;&nbsp;EXPORT DECK</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Administrator Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Go Back</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="(html === 'view_deck') || (html === 'edit_deck') || (html === 'remove_deck') || (html === 'export_deck')" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="bi bi-stack fs-1 fw-bold text-center text-info">&nbsp;&nbsp;Decks</p>
+					<br>
+					{% if decks %}
+					{% for deck in decks %}
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="{{ deck }}" @click="m('{{ user }}','{{ deck }}')" {% set ns.dek = deck %} autofocus>{{ deck }}</button>
+					</span>
+					<br>
+					{% endfor %}
+					{% else %}
+					<p class="bi bi-exclamation-circle-fill fs-2 fw-bold text-center text-secondary">&nbsp;&nbsp;No Deck Exists !!!</p>
+					<br>
+					{% endif %}
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Decks" @click="ht('decks')" autofocus>&nbsp;&nbsp;Go Back</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Administrator Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Back To Dashboard</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="html === 'deck'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="fs-1 fw-bold text-center text-info">{{ ns.dek }}</p>
+					<br>
+					{% if cards[ns.dek] %}
+					<table class="container table table-dark table-hover fs-4 fw-bold">
+						<thead>
+							<tr>
+								<th scope="col">Front</th>
+								<th scope="col">Back</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for card in cards[ns.dek] %}
+							<tr>
+								<td>{{ card['question'] }}</td>
+								<td>{{ card['answer'] }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					{% else %}
+					<p class="bi bi-exclamation-circle-fill fs-2 fw-bold text-center text-secondary">&nbsp;&nbsp;No Card Exists !!!</p>
+					{% endif %}
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Decks" @click="ht('decks')" autofocus>&nbsp;&nbsp;Go Back</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Administrator Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Back To Dashboard</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="html === 'create_deck'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="fs-1 fw-bold text-center text-info"><u>Create Deck</u></p>
+					<br>
+					<form class="needs-validation" id="create_deck" accept-charset="utf-8" action="/admin/dashboard" autocomplete="on" enctype="application/x-www-form-urlencoded" method="post" target="_self">
+						<span class="row justify-content-center">
+							<p class="fs-1 fw-bold text-center text-info"><label class="form-label">Deck Name</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="text" name="create_deck_name" placeholder="DECK NAME" pattern="^(?!.*\s).{4,16}$" minlength="4" maxlength="16" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p>
+								<ul class="list-unstyled container fs-4 fw-bold text-start text-secondary">
+									<li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Deck Name must not contain any Whitespaces</li>
+									<li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Deck Name must be 4 to 16 Characters long</li>
+								</ul>
+							</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<button type="submit" class="bi bi-check-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Submit" form="create_deck" formaction="/admin/dashboard" formenctype="application/x-www-form-urlencoded" formmethod="post" formtarget="_self" autofocus>&nbsp;&nbsp;SUBMIT</button>
+						</span>
+					</form>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Decks" @click="ht('decks')" autofocus>&nbsp;&nbsp;Go Back</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Administrator Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Back To Dashboard</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="html === 'update_deck'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="fs-1 fw-bold text-center text-info"><u>Edit Deck</u></p>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Add Card" @click="ht('add_card')" autofocus>&nbsp;&nbsp;ADD CARD</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Remove Card" @click="ht('remove_card')" autofocus>&nbsp;&nbsp;REMOVE CARD</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Decks" @click="ht('decks')" autofocus>&nbsp;&nbsp;Go Back</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Administrator Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Back To Dashboard</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="html === 'add_card'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="fs-1 fw-bold text-center text-info"><u>Add Card</u></p>
+					<br>
+					<form class="needs-validation" id="add_card" accept-charset="utf-8" action="/admin/dashboard" autocomplete="on" enctype="application/x-www-form-urlencoded" method="post" target="_self">
+						<input type="text" name="add_card_deck" :value="obj" hidden>
+						<span class="row justify-content-center">
+							<p class="fs-1 fw-bold text-center text-info"><label class="form-label">Card Front</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="text" name="add_card_front" placeholder="CARD FRONT" pattern="^.{1,64}$" minlength="1" maxlength="64" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p>
+								<ul class="list-unstyled container fs-4 fw-bold text-start text-secondary">
+									<li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Its Length must NOT exceed 64 Characters</li>
+								</ul>
+							</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<p class="fs-1 fw-bold text-center text-info"><label class="form-label">Card Back</label></p>
+							<br>
+							<input class="form-control-xxl border border-white border-5 rounded rounded-3 fs-1 fw-bold text-center text-info col-6 shadow" type="text" name="add_card_back" placeholder="CARD BACK" pattern="^.{1,16}$" minlength="1" maxlength="64" size="20" autocomplete="on" autofocus required>
+							<br>
+							<p>
+								<ul class="list-unstyled container fs-4 fw-bold text-start text-secondary">
+									<li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Its Length must NOT exceed 64 Characters</li>
+								</ul>
+							</p>
+						</span>
+						<br>
+						<span class="row justify-content-center">
+							<button type="submit" class="bi bi-check-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Submit" form="add_card" formaction="/admin/dashboard" formenctype="application/x-www-form-urlencoded" formmethod="post" formtarget="_self" autofocus>&nbsp;&nbsp;SUBMIT</button>
+						</span>
+					</form>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Decks" @click="ht('decks')" autofocus>&nbsp;&nbsp;Go Back</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Administrator Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Back To Dashboard</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="html === 'remove_card'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="fs-1 fw-bold text-center text-info"><u>Remove Card</u></p>
+					<br>
+					<br>
+					<p class="fs-2 fw-bold text-center text-info">{{ ns.dek }}</p>
+					<br>
+					{% if cards[ns.dek] %}
+					{% for card in cards[ns.dek] %}
+					<span class="row justify-content-center">
+						<button type="button" class="col-6" title="{{ card['question'] }}" @click="m('{{ user }}','{{ card.question }}')" autofocus>{{ card['question'] }} :- {{ card['answer'] }}</button>
+					</span>
+					{% endfor %}
+					{% else %}
+					<p class="bi bi-exclamation-circle-fill fs-2 fw-bold text-center text-secondary">&nbsp;&nbsp;No Card Exists !!!</p>
+					{% endif %}
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Decks" @click="ht('decks')" autofocus>&nbsp;&nbsp;Go Back</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Administrator Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Back To Dashboard</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="html === 'users'" class="container-fluid col-12 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="bi bi-people-fill fs-1 fw-bold text-center text-info">&nbsp;&nbsp;Users</p>
+					<br>
+					<table class="container table table-dark table-hover fs-4 fw-bold">
+						<thead>
+							<tr>
+								<th scope="col">E-Mail</th>
+								<th scope="col">Correct</th>
+								<th scope="col">Incorrect</th>
+								<th scope="col">Score</th>
+								<th scope="col">Accuracy</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+							<tr>
+								<td>{{ user['email'] }}</td>
+								<td>{{ user['correct'] }}</td>
+								<td>{{ user['incorrect'] }}</td>
+								<td>{{ user['score'] }}</td>
+								<td>{{ user['accuracy'] }} %</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Administrator Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Go Back</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				{% else %}
+				<div v-if="html === 'home'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<p class="position-absolute start-0 col-3 fs-2 fw-bold text-center text-warning">SCORE :- {{ data['score'] }}</p>
+					<p class="position-absolute end-0 col-3 fs-2 fw-bold text-center text-warning">ACCURACY :- {{ data['accuracy'] }} %</p>
+					<br>
+					<p class="bi bi-list fs-1 fw-bold text-center text-info">&nbsp;&nbsp;Menu</p>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Lets Learn & Memorize" @click="ht('decks')" autofocus>&nbsp;&nbsp;LETS LEARN & MEMORIZE</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="Export Progress Report" @click="m('{{ user }}','')" autofocus>PROGRESS REPORT</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				<div v-if="html === 'decks'" class="container col-8 border border-secondary border-5 rounded-pill rounded-3">
+					<br>
+					<p class="bi bi-stack fs-1 fw-bold text-center text-info">&nbsp;&nbsp;Decks</p>
+					<br>
+					{% if decks %}
+					{% for deck in decks %}
+					<span class="row justify-content-center">
+						<button type="button" class="btn btn-info btn-xxl btn-outline-dark col-6 fs-1 fw-bold shadow" title="{{ deck }}" @click="m('{{ user }}','{{ deck }}')" {% set ns.dek = deck %} autofocus>{{ deck }}</button>
+					</span>
+					<br>
+					{% endfor %}
+					{% else %}
+					<p class="bi bi-exclamation-circle-fill fs-2 fw-bold text-center text-secondary">&nbsp;&nbsp;No Deck Exists !!!</p>
+					<br>
+					{% endif %}
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-arrow-left-circle-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Dashboard" @click="ht('home')" autofocus>&nbsp;&nbsp;Back To Dashboard</button>
+					</span>
+					<br>
+					<span class="row justify-content-center">
+						<button type="button" class="bi bi-house-fill btn btn-info btn-xxl btn-outline-dark col-4 fs-1 fw-bold shadow" title="Home Page" onclick="location='/'" autofocus>&nbsp;&nbsp;Home</button>
+					</span>
+					<br>
+				</div>
+				{% endif %}
+			</section>
+		</main>
+		<footer class="container-fluid position-sticky bottom-0 bg-dark text-center">
+			<address>
+				<a type="button" role="button" class="bi bi-envelope-fill btn btn-dark btn-xxl display-1 fw-bold shadow link-light" title="Email ID" href="mailto:21f1006019@student.onlinedegree.iitm.ac.in" autofocus>&nbsp;&nbsp;ANSH KUSHWAHA&nbsp; 21f1006019@student.onlinedegree.iitm.ac.in</a>
+			</address>
+		</footer>
+		<script src="https://unpkg.com/vue@3"></script>
+		<script type="application/javascript" src="../static/js/script.js"></script>
+	</body>
+</html>
